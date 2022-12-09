@@ -27,13 +27,26 @@ app.use("/management", managementRoutes);
 app.use("/sales", salesRoutes);
 
 // MONGOOSE SETUP
-const PORT = process.env.PORT || 9000;
-mongoose
-  .connect(process.env.PORT, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
-    app.listen(PORT, () => console.log(`server port: ${PORT}`));
-  })
-  .catch((error) => console.log(error + "did not connect"));
+// mongoose
+//   .connect(process.env.PORT, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   })
+//   .then(() => {
+//     app.listen(PORT, () => console.log(`server port: ${PORT}`));
+//   })
+//   .catch((error) => console.log(error + "did not connect"));
+
+async function connect() {
+  try {
+    await mongoose.connect(process.env.MONGO || 9000, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log(`connected to mongo data base at port`);
+  } catch (error) {
+    console.log("can not connected to the mongo db beacaus" + error);
+  }
+}
+
+connect();
