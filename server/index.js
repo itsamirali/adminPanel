@@ -1,6 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 import helmet from "helmet";
@@ -27,16 +27,6 @@ app.use("/management", managementRoutes);
 app.use("/sales", salesRoutes);
 
 // MONGOOSE SETUP
-// mongoose
-//   .connect(process.env.PORT, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//   })
-//   .then(() => {
-//     app.listen(PORT, () => console.log(`server port: ${PORT}`));
-//   })
-//   .catch((error) => console.log(error + "did not connect"));
-
 async function connect() {
   try {
     await mongoose.connect(process.env.MONGO || 9000, {
